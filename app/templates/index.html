@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+{% import 'macros.html' as macro %}
+{% block content %}
+<h2>Business News</h2>
+    <hr>
+    <div class="news">
+        {{macro.displayInfo(business_news)}}
+    </div>
+    <h2>General News</h2>
+    <hr>
+    <div class="news">
+        {{macro.displayInfo(general)}}
+    </div>
+    <h2>Entertainment News</h2>
+    <hr>
+    <div class="news">
+        {{macro.displayInfo(entertainment)}}
+    </div>
+    <h2>Sports News</h2>
+    <hr>
+    <div class="news">
+        {{macro.displayInfo(sports)}}
+    </div>
+</div>
+{% endblock %}
