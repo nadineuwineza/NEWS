@@ -40,3 +40,37 @@ def process_results(results):
             sources_list.append(new_item)
         
     return sources_list
+
+def get_articles(id):
+    
+    get_articles_url = article_url.format(id,api_key)
+ 
+    '''
+    Method that gets the json response to our url request
+    '''
+    with urllib.request.urlopen(get_articles_url) as url:
+        get_articles_data = url.read()
+        get_articles_response = json.loads(get_articles_data)
+        
+
+        articles_results = None
+
+         if get_articles_response['articles']:
+            articles_results_list = get_articles_response['articles']
+            articles_results = process_articles(articles_results_list)
+            
+    return articles_results
+
+def process_articles(articles):
+    articles_results = []
+    for item in articles:
+        id = item.get('id')
+        author = item.get('author')
+        title = item.get('title')
+        urlToImage = item.get('urlToImage')
+        url = item.get('url')
+
+        if url:
+            article_object = Articles(id, author,title,urlToImage,url)
+            articles_results.append(article_object)
+    return articles_results
